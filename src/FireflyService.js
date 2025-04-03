@@ -1,22 +1,22 @@
 import {getConfigVariable} from "./util.js";
 
 export default class FireflyService {
-    #BASE_URL;
-    #PERSONAL_TOKEN;
+    BASE_URL;
+    PERSONAL_TOKEN;
 
     constructor() {
-        this.#BASE_URL = getConfigVariable("FIREFLY_URL")
-        if (this.#BASE_URL.slice(-1) === "/") {
-            this.#BASE_URL = this.#BASE_URL.substring(0, this.#BASE_URL.length - 1)
+        this.BASE_URL = getConfigVariable("FIREFLY_URL")
+        if (this.BASE_URL.slice(-1) === "/") {
+            this.BASE_URL = this.BASE_URL.substring(0, this.BASE_URL.length - 1)
         }
 
-        this.#PERSONAL_TOKEN = getConfigVariable("FIREFLY_PERSONAL_TOKEN")
+        this.PERSONAL_TOKEN = getConfigVariable("FIREFLY_PERSONAL_TOKEN")
     }
 
     async getCategories() {
-        const response = await fetch(`${this.#BASE_URL}/api/v1/categories`, {
+        const response = await fetch(`${this.BASE_URL}/api/v1/categories`, {
             headers: {
-                Authorization: `Bearer ${this.#PERSONAL_TOKEN}`,
+                Authorization: `Bearer ${this.PERSONAL_TOKEN}`,
             }
         });
 
@@ -57,10 +57,10 @@ export default class FireflyService {
             });
         })
 
-        const response = await fetch(`${this.#BASE_URL}/api/v1/transactions/${transactionId}`, {
+        const response = await fetch(`${this.BASE_URL}/api/v1/transactions/${transactionId}`, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${this.#PERSONAL_TOKEN}`,
+                Authorization: `Bearer ${this.PERSONAL_TOKEN}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(body)

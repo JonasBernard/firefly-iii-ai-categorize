@@ -2,8 +2,8 @@ import {Configuration, OpenAIApi} from "openai";
 import {getConfigVariable} from "./util.js";
 
 export default class OpenAiService {
-    #openAi;
-    #model = "gpt-3.5-turbo-instruct";
+    openAi;
+    model = "gpt-3.5-turbo-instruct";
 
     constructor() {
         const apiKey = getConfigVariable("OPENAI_API_KEY")
@@ -12,15 +12,15 @@ export default class OpenAiService {
             apiKey
         });
 
-        this.#openAi = new OpenAIApi(configuration)
+        this.openAi = new OpenAIApi(configuration)
     }
 
     async classify(categories, destinationName, description) {
         try {
             const prompt = this.#generatePrompt(categories, destinationName, description);
 
-            const response = await this.#openAi.createCompletion({
-                model: this.#model,
+            const response = await this.openAi.createCompletion({
+                model: this.model,
                 prompt
             });
 
