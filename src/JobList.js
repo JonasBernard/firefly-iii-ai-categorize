@@ -16,7 +16,7 @@ export default class JobList {
         return this.jobs;
     }
 
-    createJob(data) {
+    createJob(data, message) {
         const id = uuid()
         const created = new Date();
 
@@ -25,6 +25,7 @@ export default class JobList {
             created,
             status: "queued",
             data,
+            message,
         }
 
         this.jobs.set(id, job);

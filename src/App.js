@@ -122,7 +122,7 @@ export default class App {
         const job = this.jobList.createJob({
             destinationName,
             description
-        });
+        }, message);
 
         if (message) {
             console.warn(message, req.body);
